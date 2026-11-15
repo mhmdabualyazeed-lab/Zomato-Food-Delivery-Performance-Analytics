@@ -1,0 +1,481 @@
+table 'Zomato Dataset'
+	lineageTag: 35b82a9c-ab6a-4615-8228-414f611cb2d4
+
+	measure 'Total Deliveries' =
+			
+			COUNT('Zomato Dataset'[ID])
+		lineageTag: d30f8a31-3c48-4250-8d0e-3f10ec4301cb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Rating' =
+			
+			AVERAGE('Zomato Dataset'[Delivery_person_Ratings])
+		lineageTag: c1a1ec4c-2820-4a21-b560-be3a9c5de5ee
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Late Deliveries' =
+			
+			CALCULATE(
+			    COUNT('Zomato Dataset'[ID]),
+			    'Zomato Dataset'[Time_taken (min)] > 40
+			)
+		formatString: 0
+		lineageTag: 27f5cca1-75b3-427a-9f43-240702963ee6
+
+	measure 'Delay Rate %' =
+			
+			DIVIDE(
+			    CALCULATE(
+			        COUNT('Zomato Dataset'[ID]),
+			        'Zomato Dataset'[Delay Category] <> "On Time"
+			    ),
+			    COUNT('Zomato Dataset'[ID])
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: fed6ea5b-91e6-4b4f-96b7-9423589bd960
+
+	column ID
+		dataType: string
+		lineageTag: 17142be8-a082-4025-8446-9d7626b5800f
+		summarizeBy: none
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delivery_person_ID
+		dataType: string
+		lineageTag: 5795fc29-b746-44e5-ac9b-9987d410f7c6
+		summarizeBy: none
+		sourceColumn: Delivery_person_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delivery_person_Age
+		dataType: int64
+		formatString: 0
+		lineageTag: b0dacbd1-a3d2-4bc3-990a-6e9605b42b9e
+		summarizeBy: sum
+		sourceColumn: Delivery_person_Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delivery_person_Ratings
+		dataType: int64
+		formatString: 0
+		lineageTag: b22e7f1f-e250-42b6-ade8-d62ffd61692f
+		summarizeBy: sum
+		sourceColumn: Delivery_person_Ratings
+
+		annotation SummarizationSetBy = Automatic
+
+	column Restaurant_latitude
+		dataType: double
+		lineageTag: d48ccf36-7723-45b9-a610-0c83bd1a13bb
+		summarizeBy: sum
+		sourceColumn: Restaurant_latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Restaurant_longitude
+		dataType: double
+		lineageTag: 5252968b-6074-4ccb-a28a-f7d1f15e965f
+		summarizeBy: sum
+		sourceColumn: Restaurant_longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Delivery_location_latitude
+		dataType: double
+		lineageTag: f983ecc7-8a6a-4b3d-b154-9837e348de5d
+		summarizeBy: sum
+		sourceColumn: Delivery_location_latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Delivery_location_longitude
+		dataType: double
+		lineageTag: 002cd55d-12d4-4ddf-bbce-c76769b9f027
+		summarizeBy: sum
+		sourceColumn: Delivery_location_longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Order_Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7afd0ab7-3178-430c-99fa-75a9ba93178a
+		summarizeBy: none
+		sourceColumn: Order_Date
+
+		variation Variation
+			isDefault
+			relationship: e88d427a-482f-47a2-b16a-80db36e4a726
+			defaultHierarchy: LocalDateTable_29934c54-99b9-46bc-ba5b-8227fb9b8b16.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Time_Orderd
+		dataType: string
+		isHidden
+		lineageTag: 27af3577-e91d-4ed6-aa33-26115451110e
+		summarizeBy: none
+		sourceColumn: Time_Orderd
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Time_Order_picked
+		dataType: string
+		isHidden
+		lineageTag: 4e042e14-c74e-4b28-b6b0-abd000f06ae3
+		summarizeBy: none
+		sourceColumn: Time_Order_picked
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weather_conditions
+		dataType: string
+		lineageTag: 718e8c22-eb0e-4519-b188-fa3a2f9abe1e
+		summarizeBy: none
+		sourceColumn: Weather_conditions
+
+		annotation SummarizationSetBy = Automatic
+
+	column Road_traffic_density
+		dataType: string
+		lineageTag: 48acfa34-83df-44ed-84cf-fc015f7767a0
+		summarizeBy: none
+		sourceColumn: Road_traffic_density
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vehicle_condition
+		dataType: int64
+		formatString: 0
+		lineageTag: 2911257c-4a1c-4c5a-a84a-65fc4e05f2bc
+		summarizeBy: sum
+		sourceColumn: Vehicle_condition
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type_of_order
+		dataType: string
+		lineageTag: 82434a6c-14fa-4f78-9254-fef81f218b93
+		summarizeBy: none
+		sourceColumn: Type_of_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type_of_vehicle
+		dataType: string
+		lineageTag: 1e53a9aa-50b0-45ac-8080-786003a69eee
+		summarizeBy: none
+		sourceColumn: Type_of_vehicle
+
+		annotation SummarizationSetBy = Automatic
+
+	column multiple_deliveries
+		dataType: string
+		lineageTag: 203c3a55-9b18-4de7-b980-5a69502629bc
+		summarizeBy: none
+		sourceColumn: multiple_deliveries
+
+		annotation SummarizationSetBy = Automatic
+
+	column Festival
+		dataType: string
+		lineageTag: e32b69d2-08b2-4c9b-b72e-65b508e3029c
+		summarizeBy: none
+		sourceColumn: Festival
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: f7038871-50ac-44ba-b4e2-b1c61be2209c
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Time_taken (min)'
+		dataType: int64
+		formatString: 0
+		lineageTag: a26cd38e-9df7-49d2-9d01-1802beb33dc3
+		summarizeBy: sum
+		sourceColumn: Time_taken (min)
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cleaned_Time_Orderd
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 63fd6435-1d95-409b-a890-004a7a2e1209
+		summarizeBy: none
+		sourceColumn: Cleaned_Time_Orderd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column Cleaned_Time_Order_picked
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: c8132587-7a83-45b8-bcc3-156fff5ec768
+		summarizeBy: none
+		sourceColumn: Cleaned_Time_Order_picked
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column page3_Order_Prep_Time_min = ```
+			
+			VAR StartTime = 'Zomato Dataset'[Cleaned_Time_Orderd]
+			VAR EndTime = 'Zomato Dataset'[Cleaned_Time_Order_picked]
+			VAR RawMinutes = DATEDIFF(StartTime, EndTime, MINUTE)
+			RETURN 
+			    IF(
+			        RawMinutes < 0, 
+			        RawMinutes + 1440, 
+			        RawMinutes
+			    )
+			```
+		formatString: 0
+		lineageTag: 90230fab-25f1-471d-8662-de5a3325a5ed
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column page3_Transit_Time_min = 'Zomato Dataset'[Time_taken (min)] - 'Zomato Dataset'[page3_Order_Prep_Time_min]
+		lineageTag: 5b6deef5-ae82-40ac-947e-97a6bc42a725
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column page3_Distance_km = ```
+			
+			VAR Lat1 = RADIANS('Zomato Dataset'[Restaurant_latitude])
+			VAR Lon1 = RADIANS('Zomato Dataset'[Restaurant_longitude])
+			VAR Lat2 = RADIANS('Zomato Dataset'[Delivery_location_latitude])
+			VAR Lon2 = RADIANS('Zomato Dataset'[Delivery_location_longitude])
+			
+			VAR dLat = Lat2 - Lat1
+			VAR dLon = Lon2 - Lon1
+			
+			VAR a = SIN(dLat / 2)^2 + COS(Lat1) * COS(Lat2) * SIN(dLon / 2)^2
+			VAR c = 2 * ASIN(SQRT(a))
+			VAR R = 6371 
+			
+			RETURN R * c
+			```
+		formatString: 0.00
+		lineageTag: 6adc823f-7ea9-47ae-a612-eee9fe1fa925
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column page3_Speed_kmph =
+			
+			IF(
+			    'Zomato Dataset'[Time_taken (min)] > 0,
+			    'Zomato Dataset'[Distance_km] / ('Zomato Dataset'[Time_taken (min)] / 60),
+			    BLANK()
+			)
+		formatString: 0.00
+		lineageTag: 6cb6fb55-5321-48fe-bc19-bc4cd04c0357
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column page3_Bottleneck_Flag =
+			
+			VAR MedianPrep = MEDIAN('Zomato Dataset'[page3_Order_Prep_Time_min])
+			VAR MedianTransit = MEDIAN('Zomato Dataset'[page3_Transit_Time_min])
+			VAR CurrentPrep = 'Zomato Dataset'[page3_Order_Prep_Time_min]
+			VAR CurrentTransit = 'Zomato Dataset'[page3_Transit_Time_min]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        CurrentPrep > MedianPrep && CurrentTransit > MedianTransit, "Both delayed",
+			        CurrentPrep > MedianPrep, "Kitchen delay",
+			        CurrentTransit > MedianTransit, "Road delay",
+			        "Normal"
+			    )
+		lineageTag: 544f04cf-d37f-4f27-8a64-0011b44695fc
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delivery_Status
+		dataType: string
+		lineageTag: 289efb28-cadd-4b59-804f-81f46c93b605
+		summarizeBy: none
+		sourceColumn: Delivery_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delay Category'
+		dataType: string
+		lineageTag: 06c15614-103c-4584-9fe4-d4b1a28be042
+		summarizeBy: none
+		sourceColumn: Delay Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delivery_Latitude_Clean =
+			
+			IF(
+			    'Zomato Dataset'[Delivery_location_latitude] < 1 && 'Zomato Dataset'[Delivery_location_latitude] > -1,
+			    BLANK(),
+			    'Zomato Dataset'[Delivery_location_latitude]
+			)
+		formatString: 0.0000000
+		lineageTag: d2a02243-c582-4d2f-94a9-46c365bb0232
+		dataCategory: Latitude
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delivery_Long_Clean =
+			
+			IF(
+			    'Zomato Dataset'[Delivery_location_longitude] < 1 && 'Zomato Dataset'[Delivery_location_longitude] > -1,
+			    BLANK(),
+			    'Zomato Dataset'[Delivery_location_longitude]
+			)
+		lineageTag: 4d8baf20-268d-4bd2-a65d-b1963b439aac
+		dataCategory: Longitude
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Distance_km =
+			
+			VAR lat1 = RADIANS('Zomato Dataset'[Restaurant_Lat_Clean])
+			VAR lon1 = RADIANS('Zomato Dataset'[Restaurant_Long_Clean])
+			VAR lat2 = RADIANS('Zomato Dataset'[Delivery_location_latitude])
+			VAR lon2 = RADIANS('Zomato Dataset'[Delivery_location_longitude])
+			VAR dlat = lat2 - lat1
+			VAR dlon = lon2 - lon1
+			VAR a = SIN(dlat/2)^2 + COS(lat1) * COS(lat2) * SIN(dlon/2)^2
+			VAR c = 2 * ASIN(SQRT(a))
+			VAR R = 6371 -- Earth's radius in km
+			RETURN R * c
+		formatString: 0.00
+		lineageTag: 4e4fd2d4-6f36-424e-a287-5b9c90a604bb
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Restaurant_Long_Clean =
+			
+			IF(
+			    'Zomato Dataset'[Restaurant_longitude] < 0,
+			    BLANK(),
+			    'Zomato Dataset'[Restaurant_longitude]
+			)
+		lineageTag: e41f50e8-3daf-4764-87b1-950b4b2f9a62
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Restaurant_Lat_Clean =
+			
+			IF(
+			    'Zomato Dataset'[Restaurant_latitude] < 0,
+			    BLANK(),
+			    'Zomato Dataset'[Restaurant_latitude]
+			)
+		lineageTag: 24f95188-de71-4403-a296-e181b9fd2332
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Zomato Dataset' = m
+		mode: import
+		source = ```
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Abu_Alyazeed_PC\Desktop\Project depi\Zomato Dataset.csv"),[Delimiter=",", Columns=20, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Replaced Value" = Table.ReplaceValue(#"Promoted Headers","NaN","",Replacer.ReplaceText,{"Delivery_person_Age"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value",{{"Delivery_person_Age", Int64.Type}}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Changed Type","NaN","",Replacer.ReplaceText,{"Delivery_person_Ratings"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Replaced Value1",{{"Delivery_person_Ratings", Int64.Type}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type1", each true),
+				    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each true),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Filtered Rows1","NaN",null,Replacer.ReplaceValue,{"Road_traffic_density"}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value3","NaN",null,Replacer.ReplaceValue,{"multiple_deliveries"}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value2","NaN",null,Replacer.ReplaceValue,{"City"}),
+				    #"Filtered Rows3" = Table.SelectRows(#"Replaced Value4", each true),
+				    #"Replaced Value5" = Table.ReplaceValue(#"Filtered Rows3","NaN",null,Replacer.ReplaceValue,{"Time_Orderd"}),
+				    #"Replaced Value6" = Table.ReplaceValue(#"Replaced Value5","NaN",null,Replacer.ReplaceValue,{"Weather_conditions"}),
+				    #"Filtered Rows2" = Table.SelectRows(#"Replaced Value6", each [Road_traffic_density] <> null and [Road_traffic_density] <> ""),
+				    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Filtered Rows2", {{"Order_Date", type date}}, "en-GB"),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type with Locale", "Cleaned_Time_Ordered", each if [Time_Orderd] = "NaN" or [Time_Orderd] = null then null 
+				else if Text.Contains(Text.From([Time_Orderd]), ".") or [Time_Orderd] = "1" then 
+				    Time.From(Number.From([Time_Orderd])) 
+				else 
+				    Time.From([Time_Orderd])),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom",{{"Cleaned_Time_Ordered", type time}}),
+				    #"Added Custom1" = Table.AddColumn(#"Changed Type2", "Cleaned_Time_Order_Picked", each if [Time_Order_picked] = "NaN" or [Time_Order_picked] = null then null 
+				else if Text.Contains(Text.From([Time_Order_picked]), ".") or [Time_Order_picked] = "1" then 
+				    Time.From(Number.From([Time_Order_picked])) 
+				else 
+				    Time.From([Time_Order_picked])),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Custom1",{"Cleaned_Time_Ordered", "Cleaned_Time_Order_Picked"}),
+				    #"Added Custom2" = Table.AddColumn(#"Removed Columns", "Cleaned_Time_Orderd", each let
+				    currentValue = Text.From([Time_Orderd]),
+				    replaced24 = if Text.StartsWith(currentValue, "24:") then "00:" & Text.AfterDelimiter(currentValue, "24:") else currentValue,
+				    finalValue = if replaced24 = "1" or replaced24 = "1.0" or replaced24 = "NaN" or replaced24 = null then "00:00" else replaced24
+				in
+				    try Time.From(Number.From(finalValue)) otherwise try Time.From(finalValue) otherwise null),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Added Custom2",{{"Cleaned_Time_Orderd", type time}}),
+				    #"Added Custom3" = Table.AddColumn(#"Changed Type3", "Cleaned_Time_Order_picked", each let
+				    currentValue = Text.From([Time_Order_picked]),
+				    replaced24 = if Text.StartsWith(currentValue, "24:") then "00:" & Text.AfterDelimiter(currentValue, "24:") else currentValue,
+				    finalValue = if replaced24 = "1" or replaced24 = "1.0" or replaced24 = "NaN" or replaced24 = null then "00:00" else replaced24
+				in
+				    try Time.From(Number.From(finalValue)) otherwise try Time.From(finalValue) otherwise null),
+				    #"Changed Type4" = Table.TransformColumnTypes(#"Added Custom3",{{"Cleaned_Time_Order_picked", type time}, {"Restaurant_latitude", type number}, {"Restaurant_longitude", type number}, {"Delivery_location_latitude", type number}, {"Delivery_location_longitude", type number}}),
+				    #"Changed Type with Locale1" = Table.TransformColumnTypes(#"Changed Type4", {{"Cleaned_Time_Orderd", type time}}, "en-GB"),
+				    #"Filtered Rows4" = Table.SelectRows(#"Changed Type with Locale1", each true),
+				    #"Replaced Value7" = Table.ReplaceValue(#"Filtered Rows4","NaN","",Replacer.ReplaceText,{"Festival"}),
+				    #"Changed Type5" = Table.TransformColumnTypes(#"Replaced Value7",{{"Time_taken (min)", Int64.Type}}),
+				    #"Filtered Rows5" = Table.SelectRows(#"Changed Type5", each true),
+				    #"Replaced Value8" = Table.ReplaceValue(#"Filtered Rows5",0,null,Replacer.ReplaceValue,{"Restaurant_latitude", "Restaurant_longitude"}),
+				    #"Changed Type6" = Table.TransformColumnTypes(#"Replaced Value8",{{"Vehicle_condition", Int64.Type}}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Changed Type6", "Delivery_Status", each if [#"Time_taken (min)"] <= 30 then "on time" else if [#"Time_taken (min)"] <= 45 then "delayed" else "very delayed"),
+				    #"Added Conditional Column1" = Table.AddColumn(#"Added Conditional Column", "Delay Category", each if [#"Time_taken (min)"] <= 30 then "On time" else if [#"Time_taken (min)"] <= 45 then "delayed" else "very delayed"),
+				    #"Filtered Rows6" = Table.SelectRows(#"Added Conditional Column1", each true)
+				in
+				    #"Filtered Rows6"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

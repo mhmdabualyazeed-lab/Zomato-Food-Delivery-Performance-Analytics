@@ -1,0 +1,51 @@
+table Dax1
+	lineageTag: cf7316c6-d108-417f-ba3e-8296583cfa84
+
+	measure Total_Orders = COUNT('Zomato Dataset'[ID])
+		formatString: 0
+		lineageTag: 0e797ff9-352d-4b64-9b9b-1c5592eb7c0f
+
+	measure Total_Drivers = DISTINCTCOUNT('Zomato Dataset'[Delivery_person_ID])
+		formatString: 0
+		lineageTag: 670d2eb4-8027-42b0-9bff-09405098f338
+
+	measure Avg_Delivery_Age = AVERAGE('Zomato Dataset'[Delivery_person_Age])
+		lineageTag: cab29b90-ab5f-46ab-947c-882e35eaec66
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Avg_Drivers_Ratings = AVERAGE('Zomato Dataset'[Delivery_person_Ratings])
+		lineageTag: 363c11b2-2d55-4769-a7e0-824dbec2d54d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Delivery Time' = AVERAGE('Zomato Dataset'[Time_taken (min)])
+		formatString: 0.00
+		lineageTag: 21b7f5fc-5a13-464b-b47d-0c56a5c85fb0
+
+	measure 'Orders per Driver' =
+			
+			AVERAGEX(
+				KEEPFILTERS(VALUES('Zomato Dataset'[Delivery_person_ID])),
+				CALCULATE(COUNTA('Zomato Dataset'[ID]))
+			)
+		lineageTag: 942b070b-7195-4501-98bc-3ccb1bf292dd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 997134ad-8913-401c-bba2-d4447a9950d4
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dax1 = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 253b5a654963448ea6262f26e065b488
+

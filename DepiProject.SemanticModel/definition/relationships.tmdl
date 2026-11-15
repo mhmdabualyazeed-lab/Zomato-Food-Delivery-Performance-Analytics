@@ -1,0 +1,5 @@
+relationship e88d427a-482f-47a2-b16a-80db36e4a726
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Zomato Dataset'.Order_Date
+	toColumn: LocalDateTable_29934c54-99b9-46bc-ba5b-8227fb9b8b16.Date
+

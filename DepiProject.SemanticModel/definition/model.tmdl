@@ -1,0 +1,21 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Zomato Dataset"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'Zomato Dataset'
+ref table DateTableTemplate_ecd0290e-d1b0-4883-a715-3edc72a8ea0e
+ref table LocalDateTable_29934c54-99b9-46bc-ba5b-8227fb9b8b16
+ref table Dax1
+
+ref cultureInfo en-US
+
