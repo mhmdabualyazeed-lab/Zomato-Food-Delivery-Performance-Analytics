@@ -1,0 +1,155 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "452ea5122b8e6d24b69d",
+  "position": {
+    "x": 441.3807874437361,
+    "y": 518.1426635209076,
+    "z": 7000,
+    "height": 194.64618576711342,
+    "width": 822.44867225540884,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Zomato Dataset"
+                    }
+                  },
+                  "Property": "Cleaned_Time_Orderd"
+                }
+              },
+              "queryRef": "Zomato Dataset.Cleaned_Time_Orderd",
+              "nativeQueryRef": "Time Ordered",
+              "active": true,
+              "displayName": "Time Ordered"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Zomato Dataset"
+                        }
+                      },
+                      "Property": "page3_Order_Prep_Time_min"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Zomato Dataset.Order_Prep_Time_min)",
+              "nativeQueryRef": "Total Prepare Time (min)",
+              "displayName": "Total Prepare Time (min)"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Zomato Dataset"
+                        }
+                      },
+                      "Property": "page3_Transit_Time_min"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Zomato Dataset.Transit_Time_min)",
+              "nativeQueryRef": "Total Transit Time (min)",
+              "displayName": "Total Transit Time (min)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Zomato Dataset"
+                  }
+                },
+                "Property": "Cleaned_Time_Orderd"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Inner'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
