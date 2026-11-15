@@ -1,0 +1,30 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "1f833daeae73dca5ad20",
+  "displayName": "Weather Impact",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "1cc4224d0b716200674d",
+      "target": "3b9c5c50c1548ca23c1e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "5153f75841461aebcafd",
+      "target": "b74327fb5d5a703d4596",
+      "type": "NoFilter"
+    },
+    {
+      "source": "5153f75841461aebcafd",
+      "target": "386227b49d4dd4f0d757",
+      "type": "NoFilter"
+    },
+    {
+      "source": "1cc4224d0b716200674d",
+      "target": "8093c358b399cb41945a",
+      "type": "NoFilter"
+    }
+  ]
+}
